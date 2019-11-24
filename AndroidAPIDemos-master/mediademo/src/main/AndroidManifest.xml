@@ -1,0 +1,61 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.lll.mediademo">
+
+    <uses-sdk tools:overrideLibrary="com.lll.mediademo" />
+    <application android:supportsRtl="true">
+
+        <activity android:name=".MediaDemos" />
+        <activity
+            android:name=".basicmediadecoder.BasicMediaDecoderActivity"
+            android:label="@string/media_decoder"
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.Media">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="com.example.android.media.SAMPLE_CODE" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".basicmediarouter.BasicMediaRouterActivity"
+            android:label="@string/media_router"
+            android:theme="@style/Theme.Media">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="com.example.android.media.SAMPLE_CODE" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".facebook.SphericalPlayerActivity"
+            android:label="@string/facebook_360_Video_Player"
+            android:theme="@style/Theme.Media">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="com.example.android.media.SAMPLE_CODE" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".MediaRecorderActivity"
+            android:label="@string/media_recorder"
+            android:theme="@style/Theme.Media">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="com.example.android.media.SAMPLE_CODE" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ScreenCaptureActivity"
+            android:label="@string/screen_capture"
+            android:theme="@style/Theme.Media">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="com.example.android.media.SAMPLE_CODE" />
+            </intent-filter>
+        </activity>
+
+    </application>
+
+</manifest>

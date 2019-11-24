@@ -1,0 +1,17 @@
+*.iml
+.gradle
+.idea
+/local.properties
+/.idea/workspace.xml
+/.idea/libraries
+.DS_Store
+/build
+/gradle
+.externalNativeBuild
+/app/build
+/supportdesigndemo/build
+/supportv4demo/build
+/supportv7demo/build
+/supportv13demo/build
+/supportoterdemos/build
+/supportsource
