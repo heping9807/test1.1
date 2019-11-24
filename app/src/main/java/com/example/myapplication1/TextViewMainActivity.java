@@ -5,15 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class TextViewMainActivity extends AppCompatActivity {
 
     private TextView textViewHelloWorld;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_text_view_main);
 
         textViewHelloWorld=findViewById(R.id.textViewHelloWorld);
-        textViewHelloWorld.setText("你好，编程实现的Hello world!");
+        textViewHelloWorld.setText("Hello world");
     }
 }
