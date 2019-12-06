@@ -15,8 +15,8 @@ import java.util.TimerTask;
 
 
 public class TimeMainActivity extends AppCompatActivity implements View.OnClickListener {
-    private EditText inputet;
-    private Button get, startTime, stopTime;
+    private EditText text_biaoti,text_beizhu;
+    private Button bt_riqi, bt_chongfu, bt_tupian,bt_zhiding;
     private TextView time;
     private int i = 0;
     private Timer timer = null;
@@ -30,57 +30,28 @@ public class TimeMainActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void initView() {
-        inputet = findViewById(R.id.input);
-        get = findViewById(R.id.get);
-        startTime = findViewById(R.id.starttime);
-        stopTime = findViewById(R.id.stoptime);
+        text_biaoti = findViewById(R.id.editText_biaoti);
+        text_beizhu = findViewById(R.id.editText_beizhu);
+        bt_riqi = findViewById(R.id.button);
+        bt_chongfu = findViewById(R.id.button2);
+        bt_tupian = findViewById(R.id.button3);
+        bt_zhiding = findViewById(R.id.button4);
+
         time = findViewById(R.id.time);
-        get.setOnClickListener(this);
-        startTime.setOnClickListener(this);
-        stopTime.setOnClickListener(this);
+        bt_riqi.setOnClickListener(this);
+        bt_chongfu.setOnClickListener(this);
+        bt_tupian.setOnClickListener(this);
+        bt_zhiding.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.get:
-                time.setText(inputet.getText().toString());
-                i = Integer.parseInt(inputet.getText().toString());
-                break;
-            case R.id.starttime:
-                startTime();
-                break;
-            case R.id.stoptime:
-                stopTime();
-                break;
-            default:
-                break;
+
         }
     }
 
-    private Handler mHandler = new Handler() {
-        public void handleMessage(Message msg) {
-            time.setText(msg.arg1 + "");
-            startTime();
-        };
-    };
 
-    public void startTime() {
-        timer = new Timer();
-        task = new TimerTask() {
-
-            @Override
-            public void run() {
-                if (i > 0) {   //加入判断不能小于0
-                    i--;
-                    Message message = mHandler.obtainMessage();
-                    message.arg1 = i;
-                    mHandler.sendMessage(message);
-                }
-            }
-        };
-        timer.schedule(task, 1000);
-    }
 
     public void stopTime(){
         timer.cancel();
