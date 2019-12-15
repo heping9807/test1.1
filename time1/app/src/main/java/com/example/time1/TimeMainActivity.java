@@ -28,8 +28,6 @@ public class TimeMainActivity extends AppCompatActivity  {
         initView();
     }
 
-
-
     private void initView() {
         text_biaoti = findViewById(R.id.editText_biaoti);
         text_beizhu = findViewById(R.id.editText_beizhu);

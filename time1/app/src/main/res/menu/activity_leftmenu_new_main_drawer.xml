@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_shike"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="@string/text_shike" />
+        <item
+            android:id="@+id/nav_xiaobujian"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="@string/text_xiaobujian" />
+        <item
+            android:id="@+id/nav_zhutise"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/text_zhutise" />
+        <item
+            android:id="@+id/nav_gaojiban"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="@string/text_gaojiban" />
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_yingyongsuo"
+                android:icon="@drawable/ic_menu_share"
+                android:title="@string/text_yingyongsuo" />
+            <item
+                android:id="@+id/nav_shezhi"
+                android:icon="@drawable/ic_menu_send"
+                android:title="@string/text_shezhi" />
+            <item
+                android:id="@+id/nav_guanyu"
+                android:icon="@drawable/ic_menu_share"
+                android:title="@string/text_guanyu" />
+            <item
+                android:id="@+id/nav_bangzhuyufankui"
+                android:icon="@drawable/ic_menu_send"
+                android:title="@string/text_banzhuyufankui" />
+        </menu>
+    </item>
+
+</menu>

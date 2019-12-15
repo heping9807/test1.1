@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.example.time1.ui.shike.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_2_shike" />
+
+    <fragment
+        android:id="@+id/nav_xiaobujian"
+        android:name="com.example.time1.ui.xiaobujian.GalleryFragment"
+        android:label="@string/menu_gallery"
+        tools:layout="@layout/fragment_1_xiaobujian" />
+
+    <fragment
+        android:id="@+id/nav_zhutise"
+        android:name="com.example.time1.ui.zhutise_3.SlideshowFragment"
+        android:label="@string/menu_slideshow"
+        tools:layout="@layout/fragment_5_zhutise" />
+
+    <fragment
+        android:id="@+id/nav_gaojiban"
+        android:name="com.example.time1.ui.gaojiban_4.ToolsFragment"
+        android:label="@string/menu_tools"
+        tools:layout="@layout/fragment_6_gaojiban" />
+
+    <fragment
+        android:id="@+id/nav_yingyongsuo"
+        android:name="com.example.time1.ui.yingyongsuo.ShareFragment"
+        android:label="@string/menu_share"
+        tools:layout="@layout/fragment_4yingyongsuo" />
+
+    <fragment
+        android:id="@+id/nav_shezhi"
+        android:name="com.example.time1.ui.shezhi.SendFragment"
+        android:label="@string/menu_send"
+        tools:layout="@layout/fragment_3_shezhi" />
+</navigation>
