@@ -22,6 +22,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.example.time1.DetailMainActivity;
 import com.example.time1.NewMainActivity;
 import com.example.time1.R;
 import com.example.time1.Time;
@@ -32,7 +33,8 @@ import com.example.time1.ui.shezhi.SendViewModel;
 public class HomeFragment extends Fragment {
     private SendViewModel sendViewModel;
     public Button New_button;
-    private List<Time> listTimes=new ArrayList<>();
+    public List<Time> listTimes=new ArrayList<>();
+    TimeAdapter adapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -53,7 +55,7 @@ public class HomeFragment extends Fragment {
 
         initTime();
 
-        TimeAdapter adapter = new TimeAdapter(HomeFragment.this.getActivity(), R.layout.list_view_item_time, listTimes);
+        adapter = new TimeAdapter(HomeFragment.this.getActivity(), R.layout.list_view_item_time, listTimes);
         ListView listViewTime = root.findViewById(R.id.listview);
         listViewTime.setAdapter(adapter);
 
@@ -64,6 +66,9 @@ public class HomeFragment extends Fragment {
                 Time list_time = listTimes.get(position);
                 Toast.makeText(HomeFragment.this.getActivity(), list_time.getTitle(),
                         Toast.LENGTH_SHORT).show();
+                Intent intent1 = new Intent();
+                intent1.setClass(HomeFragment.this.getActivity(), DetailMainActivity.class);
+                startActivity(intent1);
             }
         });
         return root;
