@@ -39,6 +39,7 @@ public class HomeFragment extends Fragment {
         sendViewModel =
                 ViewModelProviders.of(this).get(SendViewModel.class);
         View root = inflater.inflate(R.layout.fragment_2_shike,container, false);
+        final TextView textView = root.findViewById(R.id.text_home);
 
         New_button = root.findViewById(R.id.New_button);
         New_button.setOnClickListener(new View.OnClickListener() {
@@ -53,8 +54,9 @@ public class HomeFragment extends Fragment {
         initTime();
 
         TimeAdapter adapter = new TimeAdapter(HomeFragment.this.getActivity(), R.layout.list_view_item_time, listTimes);
-        ListView listViewTime = this.getActivity().findViewById(R.id.listview);
+        ListView listViewTime = root.findViewById(R.id.listview);
         listViewTime.setAdapter(adapter);
+
         /////////listview的点击响应函数，由position判断点击的是哪个子项
         listViewTime.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
