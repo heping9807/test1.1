@@ -3,6 +3,7 @@ package com.example.time1.ui.shike;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +15,11 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -43,12 +48,14 @@ public class HomeFragment extends Fragment {
     public List<Time> listTimes=new ArrayList<>();
     TimeAdapter timeadapter;
     int nian,yue,ri;        //年月日
-    private Timer timer = null;
-    private TimerTask task = null;
+
+    Date Now_time,endTime;
+    long diff,days=10,hours,minutes;
 
     @Override       //传值
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
         switch (requestCode){
             case REQUEST_CODE_GET_ALL:
                 if(resultCode==RESULT_OK){
@@ -59,10 +66,27 @@ public class HomeFragment extends Fragment {
                     ri = data.getIntExtra("ri",0);
                     String biaoti=data.getStringExtra("biaoti");
                     String beizhu=data.getStringExtra("beizhu");
-
-                    listTimes.add(new Time("biaoti","100 days",R.drawable.time_1));
+                    String time=data.getStringExtra("Time");
+/*
+                    try {
+                        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
+                        Now_time = new Date(System.currentTimeMillis());
+                        endTime = df.parse("nian"+"-"+"yue"+"-"+"ri"+" "+"00-00-00");
+                        diff = Now_time.getTime() - endTime.getTime();
+                        days = diff / (1000 * 60 * 60 * 24);
+                        hours = (diff-days*(1000 * 60 * 60 * 24))/(1000* 60 * 60);
+                        minutes = (diff-days*(1000 * 60 * 60 * 24)-hours*(1000* 60 * 60))/(1000* 60);
+                        diff = Now_time.getTime() - endTime.getTime();
+                        days = diff / (1000 * 60 * 60 * 24);
+                        String time=days+"天"+hours+"小时"+minutes+"分钟";
+                        listTimes.add(new Time(biaoti,time,R.drawable.time_1));
+                        timeadapter.notifyDataSetChanged();
+                        Toast.makeText(this.getActivity(), "新建ListView成功", Toast.LENGTH_SHORT).show();
+                    }catch (Exception e) { }
+ */
+                    listTimes.add(new Time(biaoti,time,R.drawable.time_1));
                     timeadapter.notifyDataSetChanged();
-                    Toast.makeText(this, "新建ListView成功", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this.getActivity(), "新建ListView成功", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case REQUEST_CODE_GET_COLOR:
@@ -122,8 +146,8 @@ public class HomeFragment extends Fragment {
     }
 
     private void initTime() {
-        listTimes.add(new Time("1月纪念日","100 days",R.drawable.time_1));
-        listTimes.add(new Time("2月纪念日","100 days",R.drawable.time_2));
+        listTimes.add(new Time("1月纪念日",100+"days",R.drawable.time_1));
+        listTimes.add(new Time("2月纪念日",100+"days",R.drawable.time_2));
     }
 
     public List<Time> getListTimes(){
