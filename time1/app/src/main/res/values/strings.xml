@@ -31,4 +31,9 @@
     <string name="text_guanyu">关于</string>
     <string name="text_shike">时刻</string>
     <string name="text_banzhuyufankui">帮助与反馈</string>
+    <string name="text_tongzhilan">通知栏</string>
+    <string name="text_zairilizhongxianzhi">在日历中显示</string>
+    <string name="text_kuaijietubie">快捷图标</string>
+    <string name="text_shanchu">删除</string>
+    <string name="text_xiugai">修改</string>
 </resources>

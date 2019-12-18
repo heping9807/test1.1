@@ -28,6 +28,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.time1.DetailMainActivity;
@@ -38,62 +39,56 @@ import com.example.time1.TimeMainActivity;
 import com.example.time1.ui.shezhi.SendViewModel;
 
 import static android.app.Activity.RESULT_OK;
+import static com.example.time1.DetailMainActivity.RESULT_CODE_DELETE;
 
 
 public class HomeFragment extends Fragment {
     public static final int REQUEST_CODE_GET_ALL = 903;
     public static final int REQUEST_CODE_GET_COLOR = 904;
+    public static final int REQUEST_CODE_UPDATE = 905;
     private SendViewModel sendViewModel;
     public Button New_button;
     public List<Time> listTimes=new ArrayList<>();
     TimeAdapter timeadapter;
     int nian,yue,ri;        //年月日
-
+    int Mposition;
     Date Now_time,endTime;
     long diff,days=10,hours,minutes;
 
     @Override       //传值
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         switch (requestCode){
             case REQUEST_CODE_GET_ALL:
                 if(resultCode==RESULT_OK){
-                    //取得启动该Activity的Intent对象
-
                     nian = data.getIntExtra("nian",0);
                     yue = data.getIntExtra("yue",0);
                     ri = data.getIntExtra("ri",0);
                     String biaoti=data.getStringExtra("biaoti");
                     String beizhu=data.getStringExtra("beizhu");
                     String time=data.getStringExtra("Time");
-/*
-                    try {
-                        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
-                        Now_time = new Date(System.currentTimeMillis());
-                        endTime = df.parse("nian"+"-"+"yue"+"-"+"ri"+" "+"00-00-00");
-                        diff = Now_time.getTime() - endTime.getTime();
-                        days = diff / (1000 * 60 * 60 * 24);
-                        hours = (diff-days*(1000 * 60 * 60 * 24))/(1000* 60 * 60);
-                        minutes = (diff-days*(1000 * 60 * 60 * 24)-hours*(1000* 60 * 60))/(1000* 60);
-                        diff = Now_time.getTime() - endTime.getTime();
-                        days = diff / (1000 * 60 * 60 * 24);
-                        String time=days+"天"+hours+"小时"+minutes+"分钟";
-                        listTimes.add(new Time(biaoti,time,R.drawable.time_1));
-                        timeadapter.notifyDataSetChanged();
-                        Toast.makeText(this.getActivity(), "新建ListView成功", Toast.LENGTH_SHORT).show();
-                    }catch (Exception e) { }
- */
+
                     listTimes.add(new Time(biaoti,time,R.drawable.time_1));
                     timeadapter.notifyDataSetChanged();
                     Toast.makeText(this.getActivity(), "新建ListView成功", Toast.LENGTH_SHORT).show();
                 }
                 break;
-            case REQUEST_CODE_GET_COLOR:
+            case REQUEST_CODE_UPDATE:
                 if(resultCode==RESULT_OK){
+                    int position=data.getIntExtra("edit_position",0);
+                    String biaoti=data.getStringExtra("biaoti");
+                    String shijian=data.getStringExtra("shijian");
 
-
-                }
+                    Time time = listTimes.get(position);
+                    time.setTitle(biaoti);
+                    time.setTime(shijian);
+                    timeadapter.notifyDataSetChanged();
+                    Toast.makeText(this.getActivity(), "修改成功", Toast.LENGTH_SHORT).show();
+                }else if(resultCode==RESULT_CODE_DELETE){
+                    int position=data.getIntExtra("edit_position",0);
+                    listTimes.remove(position);
+                    timeadapter.notifyDataSetChanged();
+            }
                 break;
         }
     }
@@ -104,33 +99,30 @@ public class HomeFragment extends Fragment {
                 ViewModelProviders.of(this).get(SendViewModel.class);
         View root = inflater.inflate(R.layout.fragment_2_shike,container, false);
         final TextView textView = root.findViewById(R.id.text_home);
+
+
         New_button = root.findViewById(R.id.New_button);
         initTime();
 
         timeadapter = new TimeAdapter(HomeFragment.this.getActivity(), R.layout.list_view_item_time, listTimes);
         ListView listViewTime = root.findViewById(R.id.listview);
         listViewTime.setAdapter(timeadapter);
-        /*
-        //取得启动该Fragment的对象
-        Bundle arguments = getArguments();
-        String biaoti = arguments.getString("biaoti");
-        String beizhu = arguments.getString("beizhu");
-        listTimes.add(new Time(biaoti,beizhu,R.drawable.time_1));
-        timeadapter.notifyDataSetChanged();
-        */
-
-
 
         /////////listview的点击响应函数，由position判断点击的是哪个子项
         listViewTime.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Time list_time = listTimes.get(position);
+
                 Toast.makeText(HomeFragment.this.getActivity(), list_time.getTitle(),
                         Toast.LENGTH_SHORT).show();
+            //点击打开详情页面
                 Intent intent1 = new Intent();
                 intent1.setClass(HomeFragment.this.getActivity(), DetailMainActivity.class);
-                startActivity(intent1);
+                intent1.putExtra("edit_position",position);
+                intent1.putExtra("title", list_time.getTitle());
+                intent1.putExtra("time", list_time.getTime());
+                startActivityForResult(intent1, REQUEST_CODE_UPDATE);
             }
         });
 

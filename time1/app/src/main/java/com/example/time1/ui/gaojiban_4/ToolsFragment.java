@@ -24,7 +24,6 @@ public class ToolsFragment extends Fragment {
                 ViewModelProviders.of(this).get(ToolsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_6_gaojiban, container, false);
         final TextView textView = root.findViewById(R.id.text_tools);
-        
         toolsViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
