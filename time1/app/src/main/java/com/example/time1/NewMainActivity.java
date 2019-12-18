@@ -1,6 +1,7 @@
 package com.example.time1;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -9,7 +10,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -17,7 +17,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ToggleButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +25,8 @@ public class NewMainActivity extends AppCompatActivity {
 
     public Button New_button;
     private List<Time> listTimes=new ArrayList<>();
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,8 +60,8 @@ public class NewMainActivity extends AppCompatActivity {
     }
 
     private void initTime() {
-        listTimes.add(new Time("1月纪念日","100 days",R.drawable.time_1));
-        listTimes.add(new Time("2月纪念日","100 days",R.drawable.time_2));
+        listTimes.add(new Time("1月纪念日",100+"days" ,R.drawable.time_1));
+        listTimes.add(new Time("2月纪念日",100+"days" ,R.drawable.time_2));
     }
 
     public List<Time> getListTimes(){
@@ -87,8 +88,6 @@ public class NewMainActivity extends AppCompatActivity {
             textView_title.setText(time.getTitle());
             TextView textView_shijian=(TextView)view.findViewById(R.id.text_view_time_shijian);//时间
             textView_shijian.setText(time.getTime());
-
-
 
             return view;
         }
