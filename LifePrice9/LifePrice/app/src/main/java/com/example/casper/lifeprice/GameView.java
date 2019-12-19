@@ -13,6 +13,8 @@ import android.view.View;
 
 import java.util.ArrayList;
 
+import static java.lang.Thread.sleep;
+
 /**
  * Created by jsjzx on 2019/11/18.
  */
@@ -31,6 +33,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
         holder.addCallback(this);
 
+        sprites.add(new Sprite());
         sprites.add(new Sprite());
         sprites.add(new Sprite());
         sprites.add(new Sprite());
@@ -90,17 +93,27 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
                     }
                     else
                     canvas.drawText("hello world!",20,40,p);
-                    canvas.drawText("你击中了"+touchnumber+"球",20,80,p);
+                    canvas.drawText("你击中了"+touchnumber+"个目标",20,100,p);
                     for (Sprite sprite:sprites) {
                         sprite.move();
                     }
 
                     for (Sprite sprite:sprites) {
-                        canvas.drawCircle(sprite.getX(),sprite.getY(),15,);
+                        canvas.drawCircle(sprite.getX(),sprite.getY(),15,p);
+                    }
+                    for(Sprite sprite:sprites){
+                        sprite.draw(canvas);
+                    }
+
+                    for(Sprite sprite:sprites) {
+                        if (xTouch-getX()>0 && yTouch-getY()>0
+                                && xTouch-getX()<100&& yTouch-getY()<100)
+                            touchnumber++;
+
                     }
 
                     holder.unlockCanvasAndPost(canvas);//解锁
-                    Thread.sleep(30);
+                    sleep(30);
                 }catch (Exception e){
                 }
             }
@@ -125,8 +138,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
             return y;
         }
 
-        public void move()
-        {
+        public void move() throws InterruptedException {
             x+=15*Math.cos(directionAgle);
             y+=15*Math.sin(directionAgle);
             if(x<0) x+=GameView.this.getWidth();
@@ -136,13 +148,22 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
             if(Math.random()<0.05)directionAgle=Math.random()*2*Math.PI;
 
-            if((getX()-xTouch)*(getX()-xTouch)+(getY()-yTouch)*(getY()-yTouch)<=225)
+            if (xTouch-getX()>0 && yTouch-getY()>0
+                    && xTouch-getX()<100 && yTouch-getY()<100) {
                 touchnumber++;
+                sleep(100);
+                xTouch=yTouch=0;
+                x= (int) (GameView.this.getWidth()*Math.random());
+                y= (int) (GameView.this.getHeight()*Math.random());
+                directionAgle=Math.random()*2*Math.PI;
+            }
 
         }
+
+
         public void draw(Canvas canvas)
         {
-            Drawable drawable=getContext().getResources().getDrawable(R.drawable.a1);
+            Drawable drawable=getContext().getResources().getDrawable(R.drawable.a2);
             Rect drawableRect = new Rect(x,y,x+drawable.getIntrinsicWidth(),
                     y+drawable.getIntrinsicHeight());
             drawable.setBounds(drawableRect);

@@ -31,6 +31,8 @@ import com.example.casper.lifeprice.data.model.Good;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.app.Activity.RESULT_OK;
+
 public class LifePriceMainActivity extends AppCompatActivity {
 
 

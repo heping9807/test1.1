@@ -60,8 +60,8 @@ public class NewMainActivity extends AppCompatActivity {
     }
 
     private void initTime() {
-        listTimes.add(new Time("1月纪念日",100+"days" ,R.drawable.time_1));
-        listTimes.add(new Time("2月纪念日",100+"days" ,R.drawable.time_2));
+        //listTimes.add(new Time("1月纪念日",100+"days" ,R.drawable.time_1));
+        //listTimes.add(new Time("2月纪念日",100+"days" ,R.drawable.time_2));
     }
 
     public List<Time> getListTimes(){

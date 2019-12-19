@@ -29,6 +29,8 @@ import android.view.Menu;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 
+import static com.example.time1.ui.shike.HomeFragment.REQUEST_CODE_GET_ALL;
+
 public class LeftmenuNewMainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
@@ -41,17 +43,18 @@ public class LeftmenuNewMainActivity extends AppCompatActivity {
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+/*
         FloatingActionButton fab = findViewById(R.id.fab);      //新建按钮
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent();
                 intent.setClass(LeftmenuNewMainActivity.this, TimeMainActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, REQUEST_CODE_GET_ALL);
             }
         });
-        drawer = findViewById(R.id.drawer_layout);
+ */
+                drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.

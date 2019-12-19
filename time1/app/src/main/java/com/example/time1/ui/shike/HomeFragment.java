@@ -44,16 +44,13 @@ import static com.example.time1.DetailMainActivity.RESULT_CODE_DELETE;
 
 public class HomeFragment extends Fragment {
     public static final int REQUEST_CODE_GET_ALL = 903;
-    public static final int REQUEST_CODE_GET_COLOR = 904;
     public static final int REQUEST_CODE_UPDATE = 905;
     private SendViewModel sendViewModel;
     public Button New_button;
     public List<Time> listTimes=new ArrayList<>();
     TimeAdapter timeadapter;
     int nian,yue,ri;        //年月日
-    int Mposition;
-    Date Now_time,endTime;
-    long diff,days=10,hours,minutes;
+
 
     @Override       //传值
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -61,14 +58,15 @@ public class HomeFragment extends Fragment {
         switch (requestCode){
             case REQUEST_CODE_GET_ALL:
                 if(resultCode==RESULT_OK){
-                    nian = data.getIntExtra("nian",0);
-                    yue = data.getIntExtra("yue",0);
-                    ri = data.getIntExtra("ri",0);
+                    //nian = data.getIntExtra("nian",0);
+                    //yue = data.getIntExtra("yue",0);
+                    //ri = data.getIntExtra("ri",0);
                     String biaoti=data.getStringExtra("biaoti");
-                    String beizhu=data.getStringExtra("beizhu");
                     String time=data.getStringExtra("Time");
+                    String Word=data.getStringExtra("beizhu");
 
-                    listTimes.add(new Time(biaoti,time,R.drawable.time_1));
+                    listTimes.add(new Time(biaoti ,time ,Word ,R.drawable.time_1));
+
                     timeadapter.notifyDataSetChanged();
                     Toast.makeText(this.getActivity(), "新建ListView成功", Toast.LENGTH_SHORT).show();
                 }
@@ -78,10 +76,12 @@ public class HomeFragment extends Fragment {
                     int position=data.getIntExtra("edit_position",0);
                     String biaoti=data.getStringExtra("biaoti");
                     String shijian=data.getStringExtra("shijian");
+                    String beizhu=data.getStringExtra("beizhu");
 
                     Time time = listTimes.get(position);
                     time.setTitle(biaoti);
                     time.setTime(shijian);
+                    time.setBeizhu(beizhu);
                     timeadapter.notifyDataSetChanged();
                     Toast.makeText(this.getActivity(), "修改成功", Toast.LENGTH_SHORT).show();
                 }else if(resultCode==RESULT_CODE_DELETE){
@@ -95,19 +95,15 @@ public class HomeFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        sendViewModel =
-                ViewModelProviders.of(this).get(SendViewModel.class);
+        sendViewModel = ViewModelProviders.of(this).get(SendViewModel.class);
         View root = inflater.inflate(R.layout.fragment_2_shike,container, false);
-        final TextView textView = root.findViewById(R.id.text_home);
-
-
+        //final TextView textView = root.findViewById(R.id.text_home);
         New_button = root.findViewById(R.id.New_button);
         initTime();
 
         timeadapter = new TimeAdapter(HomeFragment.this.getActivity(), R.layout.list_view_item_time, listTimes);
         ListView listViewTime = root.findViewById(R.id.listview);
         listViewTime.setAdapter(timeadapter);
-
         /////////listview的点击响应函数，由position判断点击的是哪个子项
         listViewTime.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -122,6 +118,7 @@ public class HomeFragment extends Fragment {
                 intent1.putExtra("edit_position",position);
                 intent1.putExtra("title", list_time.getTitle());
                 intent1.putExtra("time", list_time.getTime());
+                intent1.putExtra("beizhu", list_time.getBeizhu());
                 startActivityForResult(intent1, REQUEST_CODE_UPDATE);
             }
         });
@@ -134,12 +131,13 @@ public class HomeFragment extends Fragment {
                 startActivityForResult(intent, REQUEST_CODE_GET_ALL);
             }
         });
+
         return root;
     }
 
     private void initTime() {
-        listTimes.add(new Time("1月纪念日",100+"days",R.drawable.time_1));
-        listTimes.add(new Time("2月纪念日",100+"days",R.drawable.time_2));
+        //listTimes.add(new Time("标题","时间","备注",R.drawable.time_1));
+        //listTimes.add(new Time("2月纪念日",100+"days",R.drawable.time_2));
     }
 
     public List<Time> getListTimes(){
@@ -160,13 +158,17 @@ public class HomeFragment extends Fragment {
             LayoutInflater mInflater=LayoutInflater.from(this.getContext());
             View view = mInflater.inflate(this.resourceId, null);
 
-            ImageView imageView=(ImageView)view.findViewById(R.id.image_view_time_cover);//图片
+            ImageView imageView=view.findViewById(R.id.image_view_time_cover);//图片
             imageView.setImageResource(time.getCoverResourceId());
-            TextView textView_title=(TextView)view.findViewById(R.id.text_view_time_title);//标题
+
+            TextView textView_title=view.findViewById(R.id.text_view_time_title);//标题
             textView_title.setText(time.getTitle());
-            TextView textView_shijian=(TextView)view.findViewById(R.id.text_view_time_shijian);//时间
+
+            TextView textView_shijian=view.findViewById(R.id.text_view_time_shijian);//时间
             textView_shijian.setText(time.getTime());
 
+            TextView textView_beizhu=view.findViewById(R.id.text_view_time_beizhu);//备注
+            textView_beizhu.setText(time.getBeizhu());
             return view;
         }
     }

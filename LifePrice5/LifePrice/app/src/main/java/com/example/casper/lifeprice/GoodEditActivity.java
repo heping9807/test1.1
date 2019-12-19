@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import static android.app.Activity.RESULT_OK;
+
 public class GoodEditActivity extends AppCompatActivity {
 
     private EditText editTextGoodName,editTextGoodPrice;

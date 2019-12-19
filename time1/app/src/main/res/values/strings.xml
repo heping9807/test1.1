@@ -36,4 +36,6 @@
     <string name="text_kuaijietubie">快捷图标</string>
     <string name="text_shanchu">删除</string>
     <string name="text_xiugai">修改</string>
+    <string name="text_welcome">欢迎使用iTime</string>
+    <string name="text_gettime">请点击获取时间</string>
 </resources>

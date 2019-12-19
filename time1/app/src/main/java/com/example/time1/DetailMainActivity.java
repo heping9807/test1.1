@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 public class DetailMainActivity extends AppCompatActivity {
     public static final int RESULT_CODE_DELETE = 907;
-    public EditText text_biaoti,text_shijian;
+    public EditText text_biaoti,text_shijian,text_beizhu;
     public Button button_delete,button_change;
     private int editPosition;
     @Override
@@ -26,13 +26,17 @@ public class DetailMainActivity extends AppCompatActivity {
         button_delete=findViewById(R.id.button_delete);
         text_biaoti=findViewById(R.id.editText_biaoti);
         text_shijian=findViewById(R.id.editText_time);
+        text_beizhu=findViewById(R.id.editText_beizhu);
 
         editPosition=getIntent().getIntExtra("edit_position",0);
         String goodName= getIntent().getStringExtra("title");
         String goodTime= getIntent().getStringExtra("time");
+        String goodBeizhu= getIntent().getStringExtra("beizhu");
+
         if(goodName!=null) {
             text_biaoti.setText(goodName);
             text_shijian.setText(goodTime+"");
+            text_beizhu.setText(goodBeizhu);
         }
 
         final ListView listViewTime = findViewById(R.id.listview);
@@ -42,7 +46,8 @@ public class DetailMainActivity extends AppCompatActivity {
                 Intent intent = new Intent();
                 intent.putExtra("edit_position", editPosition);
                 intent.putExtra("biaoti", text_biaoti.getText().toString().trim());
-                intent.putExtra("shijian",text_shijian.getText().toString());
+                intent.putExtra("shijian",text_shijian.getText().toString().trim());
+                intent.putExtra("beizhu",text_beizhu.getText().toString().trim());
                 setResult(RESULT_OK, intent);
                 DetailMainActivity.this.finish();
             }
